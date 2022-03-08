@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct node{
+    int data;
+    node *left;
+    node *right;
+
+    node(int x)
+    {
+        data=x;
+        left=NULL;
+        right=NULL;
+    }
+};
+
+int leaf(node*root)
+{
+    if(!root)
+        return 0;
+    else if(!root->left && !root->right)
+        return 1;
+    
+    else
+    return leaf(root->left) + leaf(root->right);
+}
+
+int nonleaf(node* root)
+{
+    if(!root || (!root->left && !root->right) )
+        return 0;
+
+    return 1 + nonleaf(root->left) + nonleaf(root->right);
+}
+
+int main()
+{
+    node *root=new node(1);
+    root->left=new node(2);
+    root->right=new node(3);
+    root->left->left=new node(4);
+    root->left->right=new node(5);
+    root->right->left=new node(6);
+    root->right->right=new node(7);
+
+    cout<<"Leaf       "<< leaf(root)<<endl;
+    cout<<"Non Leaf   " <<nonleaf(root);
+    return 0;
+}
